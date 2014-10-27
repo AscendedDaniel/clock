@@ -3,7 +3,7 @@
   (general
     (links 136)
     (no_connects 0)
-    (area 47.14119 54.483003 385.60224 221.8944)
+    (area 68.529999 68.529999 175.310001 221.030001)
     (thickness 1.6)
     (drawings 86)
     (tracks 714)
@@ -20,7 +20,7 @@
 
   (layers
     (15 F.Cu signal)
-    (0 B.Cu signal hide)
+    (0 B.Cu signal)
     (16 B.Adhes user)
     (17 F.Adhes user)
     (18 B.Paste user)
@@ -67,7 +67,7 @@
     (pcbplotparams
       (layerselection 300449793)
       (usegerberextensions true)
-      (excludeedgelayer false)
+      (excludeedgelayer true)
       (linewidth 0.254000)
       (plotframeref false)
       (viasonmask false)

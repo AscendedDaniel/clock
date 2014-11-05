@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 11/2/2014 5:29:11 PM
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 11/3/2014 11:10:30 PM
 
 BeginCmp
 TimeStamp = /5455AA6B;
@@ -183,8 +183,22 @@ IdModule  = SSM-SV-12;
 EndCmp
 
 BeginCmp
-TimeStamp = /545593D0;
+TimeStamp = /54587B0A;
 Reference = J7;
+ValeurCmp = CONN_12;
+IdModule  = HEADER_12X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /54587B19;
+Reference = J8;
+ValeurCmp = CONN_12;
+IdModule  = HEADER_12X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /545593D0;
+Reference = J9;
 ValeurCmp = BARREL_JACK;
 IdModule  = PJ-036AH-SMT;
 EndCmp
@@ -243,13 +257,6 @@ TimeStamp = /5455A9F4;
 Reference = U2;
 ValeurCmp = AOZ1280;
 IdModule  = SOT23_6_Jason;
-EndCmp
-
-BeginCmp
-TimeStamp = /544DD5E1;
-Reference = U3;
-ValeurCmp = SPARK;
-IdModule  = ;
 EndCmp
 
 BeginCmp

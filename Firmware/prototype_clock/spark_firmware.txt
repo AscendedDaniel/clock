@@ -1,0 +1,144 @@
+// This #include statement was automatically added by the Spark IDE.
+#include "SparkTime/SparkTime.h"
+
+//**************************************************************//
+//  Name    : Prototype Clock                                   //
+//  Author  : Jason Cerundolo                                   //
+//  Date    : 25 Feb, 2015                                      //
+//  Version : 0.9                                               //
+//**************************************************************//
+
+UDP UDPClient;
+SparkTime rtc;
+
+unsigned long currentTime;
+unsigned long nextLaunchTime;
+String nextLaunchTimeStr;
+unsigned long countdownTime;
+bool isNegative;
+long countdownSeconds, countdownMinutes, countdownHours, countdownDays;
+unsigned long lastTime = 0UL;
+
+// Refer to schematic to find correct pin on segment board
+// To use with SPI, make sure latchPin is not CS
+const int latchPin = A0;
+const int clkPin = A3;
+const int dataPin = A5;
+const int enablePin = D0;
+const int ledPin = D7;
+int j = 0;
+
+/* Useful Constants */
+#define SECS_PER_MIN  (60UL)
+#define SECS_PER_HOUR (3600UL)
+#define SECS_PER_DAY  (SECS_PER_HOUR * 24UL)
+#define DAYS_PER_WEEK (7UL)
+#define SECS_PER_WEEK (SECS_PER_DAY * DAYS_PER_WEEK)
+#define SECS_PER_YEAR (SECS_PER_WEEK * 52UL)
+ 
+/* Useful Macros for getting elapsed time */
+#define numberOfSeconds(_time_) (_time_ % SECS_PER_MIN)  
+#define numberOfMinutes(_time_) ((_time_ / SECS_PER_MIN) % SECS_PER_MIN) 
+#define numberOfHours(_time_) ((_time_ % SECS_PER_DAY) / SECS_PER_HOUR)
+#define numberOfDays(_time_) (_time_ % SECS_PER_DAY)
+
+// From wikipedia, A is bit 0, G is bit 6, DP is bit 7
+const char font[16] = { 0x3F, 0x06, 0x5B, 0x4F, \
+                  0x66, 0x6D, 0x7D, 0x07, \
+                  0x7F, 0x6F, 0x77, 0x7C, \
+                  0x39, 0x5E, 0x79, 0x71 };
+
+const char font_inverted[16] = { 0x3F, 0x30, 0x5B, 0x79, \
+                           0x74, 0x6D, 0x6F, 0x38, \
+                           0x7F, 0x7D, 0x7E, 0x67, \
+                           0x0F, 0x73, 0x4F, 0x4E };
+                           
+
+void shiftDigitOut(uint8_t digit, bool isInverted, bool DP) {
+    if (isInverted) {
+        if (DP) {
+            SPI.transfer(font_inverted[digit%16]|(1<<7));
+        } else {
+            SPI.transfer(font_inverted[digit%16]);
+        }
+    } else {
+        if (DP) {
+            SPI.transfer(font[digit%16]|(1<<7));
+        } else {
+            SPI.transfer(font[digit%16]);
+        }
+    }
+}
+
+int setTZero(String args) {
+    unsigned long nextLaunchTime_unix = args.toInt();
+    nextLaunchTime_unix = args.toInt();
+    // need zero-length string because compiler is playing silly buggers
+    // https://community.spark.io/t/string-cant-be-assigned-undefined-reference-to-string-operator-string/8606
+    nextLaunchTimeStr = "" + String(nextLaunchTime_unix); 
+    nextLaunchTime = (nextLaunchTime_unix + SPARKTIMEEPOCHSTART);
+    
+    return 0;
+}
+
+void setup() {
+    rtc.begin(&UDPClient, "north-america.pool.ntp.org");
+    rtc.setTimeZone(0); // utc
+    setTZero("1423523269"); // manually entered as Feb 9, 2015, 23:08:30 UTC
+    
+    Spark.function("setTZero", setTZero);
+    Spark.variable("getTZero", &nextLaunchTimeStr, STRING);
+    
+    digitalWrite(latchPin, LOW);
+    digitalWrite(clkPin, LOW);
+    digitalWrite(dataPin, LOW);
+    pinMode(latchPin, OUTPUT);
+    pinMode(clkPin, OUTPUT);
+    pinMode(dataPin, OUTPUT);
+  
+    SPI.begin();
+    SPI.setBitOrder(MSBFIRST);
+    SPI.setClockDivider(SPI_CLOCK_DIV256);
+    SPI.setDataMode(SPI_MODE1);
+  
+    pinMode(enablePin, OUTPUT);
+    digitalWrite(enablePin, LOW);
+  
+    pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+    currentTime = rtc.now();
+    if (currentTime != lastTime) {
+        if (nextLaunchTime >= currentTime) {
+            countdownTime = nextLaunchTime - currentTime;
+        } else {
+            countdownTime = currentTime - nextLaunchTime;
+        }
+        
+        countdownSeconds = (countdownTime) % 60;
+        countdownMinutes = (countdownTime / SECS_PER_MIN) % 60;
+        countdownHours = (countdownTime / SECS_PER_HOUR) % 24;
+        countdownDays = (countdownTime / SECS_PER_DAY);
+        
+        // Spark is connected to left most digit
+        shiftDigitOut(countdownSeconds % 10, false, false);
+        shiftDigitOut(countdownSeconds / 10, true, true);
+      
+        shiftDigitOut(countdownMinutes % 10, false, true);
+        shiftDigitOut(countdownMinutes / 10, true, true);
+      
+        shiftDigitOut(countdownHours % 10, false, true);
+        shiftDigitOut(countdownHours / 10, true, true);
+      
+        shiftDigitOut(countdownDays % 10, false, true);
+        shiftDigitOut(countdownDays / 10, true, false);
+        shiftDigitOut((countdownDays / 100) % 10, false, false);
+        shiftDigitOut((countdownDays / 1000) % 10, true, false);
+        
+        digitalWrite(latchPin, HIGH);
+        delayMicroseconds(100); // probably could get away with shorter, but has been tested
+        digitalWrite(latchPin, LOW);
+        lastTime = currentTime;
+   }
+}

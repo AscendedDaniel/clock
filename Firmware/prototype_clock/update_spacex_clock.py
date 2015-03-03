@@ -6,7 +6,7 @@ import time
 import calendar
 from spyrk import SparkCloud
 
-ACCESS_TOKEN = '08360cb19705cd3a4fe90affa440785a74071222'
+ACCESS_TOKEN = '' # access token redacted for security reasons
 time_good = 0
 
 response = requests.get('http://spacexstats.com')

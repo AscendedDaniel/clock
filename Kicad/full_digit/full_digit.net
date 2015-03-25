@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source C:/Projects/clock/clock/Kicad/full_digit/full_digit.sch)
-    (date "3/13/2015 22:10:51")
+    (date "3/17/2015 00:00:31")
     (tool "Eeschema (2015-01-16 BZR 5376)-product"))
   (components
     (comp (ref U1)
@@ -234,13 +234,13 @@
       (tstamp 54226A6C))
     (comp (ref J12)
       (value CONN_01X12)
-      (footprint Jason_Libraries:HEADER_SMT_01x12)
+      (footprint Jason_Libraries:HEADER_SMT_01x12_SV)
       (libsource (lib conn) (part CONN_01X12))
       (sheetpath (names /) (tstamps /))
       (tstamp 54EF0031))
     (comp (ref J11)
       (value CONN_01X12)
-      (footprint Jason_Libraries:HEADER_SMT_01x12)
+      (footprint Jason_Libraries:HEADER_SMT_01x12_SV)
       (libsource (lib conn) (part CONN_01X12))
       (sheetpath (names /) (tstamps /))
       (tstamp 54EF0056))
@@ -326,18 +326,6 @@
         (pin (num 14) (name SDO) (type output))
         (pin (num 15) (name R-EXT) (type output))
         (pin (num 16) (name VDD) (type power_in))))
-    (libpart (lib device) (part C)
-      (description "Condensateur non polarise")
-      (footprints
-        (fp SM*)
-        (fp C?)
-        (fp C1-1))
-      (fields
-        (field (name Reference) C)
-        (field (name Value) C))
-      (pins
-        (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive))))
     (libpart (lib device) (part LED)
       (footprints
         (fp LED-3MM)
@@ -353,20 +341,6 @@
       (pins
         (pin (num 1) (name A) (type passive))
         (pin (num 2) (name K) (type passive))))
-    (libpart (lib device) (part R)
-      (description Resistance)
-      (footprints
-        (fp R?)
-        (fp SM0603)
-        (fp SM0805)
-        (fp R?-*)
-        (fp SM1206))
-      (fields
-        (field (name Reference) R)
-        (field (name Value) R))
-      (pins
-        (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive))))
     (libpart (lib conn) (part BARREL_JACK)
       (description "DC Barrel Jack")
       (fields
@@ -504,16 +478,42 @@
         (pin (num 5) (name P5) (type passive))
         (pin (num 6) (name P6) (type passive))
         (pin (num 7) (name P7) (type passive))
-        (pin (num 8) (name P8) (type passive)))))
+        (pin (num 8) (name P8) (type passive))))
+    (libpart (lib device) (part C)
+      (description "Condensateur non polarise")
+      (footprints
+        (fp SM*)
+        (fp C?)
+        (fp C1-1))
+      (fields
+        (field (name Reference) C)
+        (field (name Value) C))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive))))
+    (libpart (lib device) (part R)
+      (description Resistance)
+      (footprints
+        (fp R?)
+        (fp SM0603)
+        (fp SM0805)
+        (fp R?-*)
+        (fp SM1206))
+      (fields
+        (field (name Reference) R)
+        (field (name Value) R))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive)))))
   (libraries
-    (library (logical full_digit-cache)
-      (uri C:\Projects\clock\clock\Kicad\full_digit\full_digit-cache.lib))
+    (library (logical conn)
+      (uri C:\KiCad\share\library\conn.lib))
     (library (logical Jason_Custom_Home)
       (uri C:\Projects\Libraries\Jason_Custom_Home.lib))
     (library (logical device)
       (uri C:\KiCad\share\library\device.lib))
-    (library (logical conn)
-      (uri C:\KiCad\share\library\conn.lib)))
+    (library (logical full_digit-cache)
+      (uri C:\Projects\clock\clock\Kicad\full_digit\full_digit-cache.lib)))
   (nets
     (net (code 1) (name "Net-(R1-Pad1)")
       (node (ref U1) (pin 15))

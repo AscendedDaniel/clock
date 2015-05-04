@@ -41,22 +41,22 @@ void setup() {
 }
 
 void loop() {
-  if (j > 15) {
+  if (j > 10000000) {
     j = 0;
   }
   
-  SPI.transfer((font[j]));
-  SPI.transfer((font_inverted[j])|(1<<7));
-  SPI.transfer((font[j])|(1<<7));
-  SPI.transfer((font_inverted[j])|(1<<7));
-  SPI.transfer((font[j])|(1<<7));
-  SPI.transfer((font_inverted[j])|(1<<7));
-  SPI.transfer((font[j])|(1<<7));
+  SPI.transfer((font[j%10]));
+  SPI.transfer((font_inverted[j/10%10])|(1<<7));
+  SPI.transfer((font[j/100%10])|(1<<7));
+  SPI.transfer((font_inverted[j/1000%10])|(1<<7));
+  SPI.transfer((font[j/10000%10])|(1<<7));
+  SPI.transfer((font_inverted[j/100000%10])|(1<<7));
+  SPI.transfer((font[j/1000000%10])|(1<<7));
   delayMicroseconds(10);
   digitalWrite(latchPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(latchPin, LOW);
-  delay(1000);
+  delay(250);
   j++;
 }
 

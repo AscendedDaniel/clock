@@ -1,0 +1,7 @@
+"Id";"Designator";"Package";"Quantity";"Designation";"Supplier and ref";
+2;"D15,D18,D1,D2,D3,D4,D5,D22,D21,D20,D19,D6,D17,D16,D14,D13,D12,D11,D10,D9,D8,D7";"1206_LED_Reverse";22;"LED";;;
+4;"J3,J1,J2,J4";"SSM-SH-08";4;"CONN_8";;;
+10;"C1";"C_0603";1;"0.1uF 12V";;;
+11;"C2";"C_0805";1;"4.7uF 50V";;;
+12;"R1";"C_0603";1;"931R 1%";;;
+13;"U1";"SOIC16_Jason";1;"TLC5917";;;

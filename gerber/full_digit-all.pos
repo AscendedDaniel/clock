@@ -1,0 +1,36 @@
+### Module positions - created on 3/25/2015 00:01:13 ###
+### Printed by Pcbnew version kicad (2015-01-16 BZR 5376)-product
+## Unit = inches, Angle = deg.
+## Side : All
+# Ref    Val                  Package         PosX       PosY        Rot     Side
+C1       0.1uF 12V        C_0603              1.9500     4.0000     270.0    F.Cu
+C2       4.7uF 50V        C_0805              0.6250     2.9500       0.0    F.Cu
+D1       LED              1206_LED_Reverse    2.2705     5.4394     180.0    F.Cu
+D2       LED              1206_LED_Reverse    1.6799     5.4394     180.0    F.Cu
+D3       LED              1206_LED_Reverse    1.0894     5.4394     180.0    F.Cu
+D4       LED              1206_LED_Reverse    0.7559     3.6326     180.0    F.Cu
+D5       LED              1206_LED_Reverse    0.6534     4.2142     180.0    F.Cu
+D6       LED              1206_LED_Reverse    0.5509     4.7957     180.0    F.Cu
+D7       LED              1206_LED_Reverse    1.1781     1.1878       0.0    F.Cu
+D8       LED              1206_LED_Reverse    1.0752     1.7716     180.0    F.Cu
+D9       LED              1206_LED_Reverse    0.9722     2.3554       0.0    F.Cu
+D10      LED              1206_LED_Reverse    1.9320     0.5533       0.0    F.Cu
+D11      LED              1206_LED_Reverse    2.5226     0.5533       0.0    F.Cu
+D12      LED              1206_LED_Reverse    3.1132     0.5533       0.0    F.Cu
+D13      LED              1206_LED_Reverse    3.6504     1.1984     180.0    F.Cu
+D14      LED              1206_LED_Reverse    3.5474     1.7822     180.0    F.Cu
+D15      LED              1206_LED_Reverse    3.4445     2.3660     180.0    F.Cu
+D16      LED              1206_LED_Reverse    3.2282     3.6432     180.0    F.Cu
+D17      LED              1206_LED_Reverse    3.1256     4.2248     180.0    F.Cu
+D18      LED              1206_LED_Reverse    3.0231     4.8064     180.0    F.Cu
+D19      LED              1206_LED_Reverse    2.6906     3.0004     180.0    F.Cu
+D20      LED              1206_LED_Reverse    2.1000     3.0004     180.0    F.Cu
+D21      LED              1206_LED_Reverse    1.5094     3.0004     180.0    F.Cu
+D22      LED              1206_LED_Reverse    0.3680     1.1945     180.0    F.Cu
+J1       CONN_8           SSM-SH-08           3.9000     5.4000     270.0    F.Cu
+J2       CONN_8           SSM-SH-08           3.9000     0.6000     270.0    F.Cu
+J3       CONN_8           SSM-SH-08           0.3000     0.6000      90.0    F.Cu
+J4       CONN_8           SSM-SH-08           0.3000     5.4000      90.0    F.Cu
+R1       931R 1%          C_0603              2.1000     4.3000      90.0    F.Cu
+U1       TLC5917          SOIC16_Jason        2.2250     4.0000      90.0    F.Cu
+## End

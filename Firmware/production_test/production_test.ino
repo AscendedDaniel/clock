@@ -41,22 +41,25 @@ void setup() {
 }
 
 void loop() {
-  if (j > 15) {
-    j = 0;
+  for (j =0; j < 8; j++) {
+    shiftByteAllTheWay(1<<j);
+    delay(250);
   }
   
-  SPI.transfer((font[j]));
-  SPI.transfer((font_inverted[j])|(1<<7));
-  SPI.transfer((font[j])|(1<<7));
-  SPI.transfer((font_inverted[j])|(1<<7));
-  SPI.transfer((font[j])|(1<<7));
-  SPI.transfer((font_inverted[j])|(1<<7));
-  SPI.transfer((font[j])|(1<<7));
+  shiftByteAllTheWay(0x00);
+  delay(500);
+  shiftByteAllTheWay(0xFF);
+  delay(1000);
+}
+
+void shiftByteAllTheWay(int byteToShift) {
+  int i;
+    for (i = 0; i < 100; i++) {
+    SPI.transfer(byteToShift);
+  }
   delayMicroseconds(10);
   digitalWrite(latchPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(latchPin, LOW);
-  delay(1000);
-  j++;
 }
 
